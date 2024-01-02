@@ -1,0 +1,140 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.reg-container {
+    border: 2px solid #625d5d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background: url("https://nypost.com/wp-content/uploads/sites/2/2019/03/old-library-book.jpg?quality=90&strip=all&w=1200") no-repeat center center fixed;
+    background-size: cover;
+}
+
+.reg-form {
+    padding: 20px;
+    border-radius: 15px;
+    border: 2px solid  #625d5d;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    backdrop-filter: blur(15px);
+    background: transparent;
+    margin-top: 20px;
+    
+}
+/* Add these styles for the button */
+.reg-form button {
+    background-color: #4CAF50; /* Green background color */
+    color: white; /* White text color */
+    padding: 10px 20px; /* Padding for better readability */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Add a pointer cursor on hover */
+    font-size: 1em; /* Adjust font size */
+    transition: background-color 0.3s ease;
+    margin-top: 10px; /* Smooth transition for background color */
+}
+
+.reg-form button:hover {
+    background-color: #7e857e; /* Darker green color on hover */
+}
+
+
+.reg-form h1 {
+    font-size: 2em;
+    color: #f7f3f3;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.items-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.input-col-one,
+.input-col-two {
+    flex: auto;
+    margin-right: 30px;
+}
+
+.inputbox {
+    margin-bottom: 20px;
+    padding: -10px;
+}
+
+.inputbox label {
+    display: block;
+    margin-bottom: 2px; /* Adjust the margin to decrease space */
+    color: rgb(4, 0, 0);
+    text-align: left;
+    transform: translateY(-50%);
+    transition: 0.3s;
+    font: weight 200px;
+}
+   
+    
+.inputbox a{
+    color: #f7f3f3;
+   
+}
+    
+
+.inputbox input {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-bottom: 2px solid #fff;
+    background: transparent;
+    outline: none;
+    font-size: 1em;
+    color: white;
+}
+
+.inputbox input[type="date"] {
+    padding: 8px 0;
+    color: #2a2a2a;
+}
+
+.inputbox:nth-last-child(-n + 2) {
+    margin-bottom: 10px;
+}
+
+/* Additional Styling */
+.inputbox input,
+.inputbox label {
+    transition: 0.3s;
+}
+
+.inputbox input:focus + label {
+    top: -10px;
+    font-size: 0.8em;
+    color: #2a2a2a;
+    margin-bottom: 2px;
+}
+
+.inputbox input:focus {
+    border-bottom: 2px solid #2a2a2a;
+}
+
+.inputbox input[type="date"] {
+    box-sizing: border-box;
+}
+
+.input-col-one,
+.input-col-two {
+    display: flex;
+    flex-direction: column;
+}
+
+.items-container {
+    justify-content: space-between;
+}
