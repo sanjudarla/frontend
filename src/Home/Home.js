@@ -18,7 +18,7 @@ const Home = ({ user, onLogout }) => {
 
   return (
     <div>
-      <NavBar/>
+      <NavBar user={user} onLogout={onLogout} />
       <h2>{data.title}</h2>
       <p>{data.content}</p>
       <button onClick={handleContentUpdate}>Update Content</button>

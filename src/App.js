@@ -7,11 +7,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import ForgotPassword from './ForgotPassword/ForgotPassword';
 import Login from './Login/Login';
 import Contact from './NavItems/Contact';
-import Home from './NavItems/Home';
+import Home from './Home/Home';
 import Registration from './Registration/Registration';
 import Gallery from './NavItems/Gallery';
 import FeedBack from './NavItems/FeedBack';
 import MainPage from './MainPage/MainPage';
+import AdminNavBar from './Admin/AdminNavBar/AdminNavBar';
+import AddBooks from './Admin/Books/AddBooks';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -29,10 +31,16 @@ function App() {
       <ToastContainer />
       <Router>
         <Routes>
-          <Route path="/gallery" element={<Gallery />} />
+          //
+          <Route path="/adminnavbar" element={<AdminNavBar />} />
+          <Route path="/add-books" element={<AddBooks />} />
+
+
+          
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/feedback" element={<FeedBack />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/homepage" element={<Home />} />
           
           <Route
             path="/home"

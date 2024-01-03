@@ -2,9 +2,9 @@
 import React, { useState } from 'react';
 import { FaHome, FaUser, FaCamera, FaEnvelope, FaComments, FaBook, FaUserCog, FaStar, FaChartBar, FaSearch, FaCog } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import '../NavBar/NavBar.css';
+import '../AdminNavBar/AdminNavBar.css'
 
-const NavBar = ({ user, onLogout }) => {
+const AdminNavBar = ({ user, onLogout }) => {
   const [activeItem, setActiveItem] = useState('home');
   const [isSearchOpen, setIsSearchOpen] = useState(true);
 
@@ -57,6 +57,16 @@ const NavBar = ({ user, onLogout }) => {
           <Link to="/genres">
             <span className="icon">
               <FaChartBar />
+            </span>
+           
+           
+          </Link>
+        </li>
+
+        <li className={`list ${activeItem === 'addbooks' ? 'active' : ''}`} onClick={() => handleItemClick('addbooks')}>
+          <Link to="/add-books">
+            <span className="icon">
+              <FaUserCog />
             </span>
            
            
@@ -135,4 +145,4 @@ const NavBar = ({ user, onLogout }) => {
   );
 };
 
-export default NavBar;
+export default AdminNavBar;

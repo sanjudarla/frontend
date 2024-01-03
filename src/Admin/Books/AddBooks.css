@@ -1,0 +1,33 @@
+.add-books-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-books-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.add-books-box{
+    display: flex;
+    justify-content: center;
+    align-items: left;
+    flex-direction: column;
+    margin-top: 5%;
+}
+.add-books-inputbox{
+    margin-bottom: 10px;
+    padding: -10px;
+    width: 70%;
+
+}
+.add-books-inputbox textarea{
+    padding: -10px;
+    width: 70%;
+    padding-top: 10%;
+    display: flex;
+    overflow: hidden;
+
+}

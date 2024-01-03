@@ -12,6 +12,7 @@ const Registration = () => {
         dateofbirth: '',
         password: '',
         confirmPassword: '',
+        usertype: 'user', // Default value set to 'user'
     });
 
     const [passwordMatch, setPasswordMatch] = useState(true);
@@ -26,6 +27,8 @@ const Registration = () => {
         }
     };
 
+
+
     const handleRegistration = async () => {
         try {
             const emailCheckResponse = await fetch('https://localhost:44331/api/UsersAPI/CheckEmailExists', {
@@ -33,10 +36,10 @@ const Registration = () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email: formData.email }),
             });
-    
+
             if (emailCheckResponse.ok) {
                 const emailCheckResult = await emailCheckResponse.json();
-    
+
                 if (emailCheckResult && emailCheckResult.Result === 'EmailExists') {
                     toast.error('Email already exists. Please use a different email.');
                 } else {
@@ -45,7 +48,7 @@ const Registration = () => {
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ ...formData }),
                     });
-    
+
                     if (response.ok) {
                         toast.success('Registration successful');
                         setFormData({
@@ -72,8 +75,8 @@ const Registration = () => {
             setLoading(false);
         }
     };
-    
-    
+
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -126,6 +129,14 @@ const Registration = () => {
                             <label htmlFor="dateofbirth">Date Of Birth</label>
                             <input type="date" name="dateofbirth" id="dateofbirth" onChange={handleChange} value={formData.dateofbirth} required />
                         </div>
+                        <div className="inputbox">
+                            <label htmlFor="usertype">User Type</label>
+                            <select name="usertype" id="usertype" onChange={handleChange} value={formData.usertype} required>
+                                <option value="user">User</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+
                         <div className="inputbox">
                             <label htmlFor="password">Password:</label>
                             <input type="password" name="password" id="password" onChange={handleChange} value={formData.password} required />

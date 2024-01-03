@@ -11,7 +11,8 @@ import '../Login/Login.css';
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [user, setUser] = useState(null); // Add this line to declare the user state
+  const [user, setUser] = useState(null); 
+  const [usertype, setUserType] = useState('user');// Add this line to declare the user state
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -20,6 +21,8 @@ const Login = ({ onLogin }) => {
       setEmail(value);
     } else if (name === 'password') {
       setPassword(value);
+    } else if (name === 'usertype') { // Handle user type change
+      setUserType(value);
     }
   };
 
@@ -27,29 +30,35 @@ const Login = ({ onLogin }) => {
     e.preventDefault();
 
     try {
-      // Use Axios to make the HTTP request
       const response = await axios.get('https://localhost:44331/api/UsersAPI/', {
         params: {
           Email: email,
           Password: password,
+          UserType: usertype, // Include user type in the request
         },
       });
 
       // Check if there is at least one user in the response
+ 
       if (response.data.length > 0) {
-        // Iterate through all users in the array
-        const userFound = response.data.find(user => {
-          return user.Email === email && user.Password === password;
+        const userFound = response.data.find((user) => {
+          return user.Email === email && user.Password === password && user.UserType === usertype;
         });
-
+  
         if (userFound) {
-          // Authentication successful
           toast.success('Login successful');
-          setUser(userFound); // Update the user state
-          onLogin(userFound); // Update the user state in App component
-          navigate('/home');
+          setUser(userFound);
+  
+          await onLogin(userFound);
+  
+          // Check user type and navigate accordingly
+          if (usertype === 'admin') {
+            navigate('/adminnavbar');
+          } else {
+            navigate('/homepage');
+          }
         } else {
-          toast.error('Incorrect Email or password');
+          toast.error('Incorrect Email, password, or user type');
         }
       } else {
         toast.error('User not found');
@@ -91,6 +100,13 @@ const Login = ({ onLogin }) => {
                 required
               />
             </div>
+            <div className="inputbox">
+            <label htmlFor="usertype">User Type</label>
+            <select name="usertype" id="usertype" onChange={handleChange} value={usertype} required>
+              <option value="user">User</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
             <div className="inputbox">
               <a href="/forgot-password">Forgot Password?</a>
             </div>

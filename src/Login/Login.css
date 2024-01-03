@@ -138,3 +138,19 @@ body, html {
 .items-container {
     justify-content: space-between;
 }
+input,
+select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 30px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23333'%3E%3Cpath d='M6 9l4-4H2l4 4z'/%3E%3C/svg%3E") no-repeat right center;
+}
+
