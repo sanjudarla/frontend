@@ -1,0 +1,106 @@
+/* Styles for BooksList component */
+
+body {
+    background-color: #ffffff;
+    margin: 0;
+    overflow: auto;
+     /* Use 'auto' for automatic scrolling when content overflows */
+}
+.books-container-one{
+    overflow: auto;
+    height: auto;
+}
+.list-books-container {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    overflow: auto;
+    
+}
+
+.list-books-container h1 {
+    
+    font-family: 'Georgia', serif;
+}
+
+.head-container h1{
+    display: flex;
+   margin-top: 10px;
+   margin-left: 20px;
+   color: #6765a2
+}
+
+.books-list-container {
+    display: flex;
+    justify-content: center;
+    width: auto;
+    height: auto;
+    margin: 2% 4%;
+    border-radius: 5px;
+    box-shadow: 3px 6px 9px rgba(0, 0, 0, .2);
+    
+}
+ h2{
+    
+    align-items: left;
+    justify-content: left;
+    padding: 8px;
+    border-bottom: 1px solid hsl(0, 100%, 99%);
+
+}
+.new-books-container button {
+    float: right;
+    background-color: #86acdf;
+    border: 1px solid #333;
+    color: #333;
+    font-size: 7px;
+    padding: 8px 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    outline: none;
+    padding-left: 2px; /* Corrected the unit to 'px' */
+    transition: background-color 0.3s, color 0.3s, border 0.3s;
+
+    /* Optional: Hover styles for better interactivity */
+    &:hover {
+        background-color: #333;
+        color: #fff;
+    }
+}
+
+
+.new-books-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1px; /* Adjust the padding for better spacing */
+    margin: 4px;
+    text-align: center;
+    background-color: #efecea; /* Light yellow background color */
+    border-radius: 1px; /* Optional: Add rounded corners for a softer look */
+    /* Optional: Add a subtle box shadow */
+    
+}
+
+/* Assuming your book elements have a class like .book-item */
+.new-books-container img {
+    max-width:50%; /* Adjusted to 100% for responsiveness */
+    margin: 10px 0;
+    align-items: left;
+
+    padding: 1px;
+    padding-bottom: 20%; /* Adjusted the padding for book items */
+    background-color: #ffffff; /* White background color for book items */
+    border-radius: 8px; /* Optional: Add rounded corners for book items */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle box shadow for book items */
+}
+.new-books-container p {
+    margin: 5px 0;
+    align-items: left;
+    text-align: left;
+    justify-content: left;
+    font-size: 14px;
+    color: #0d0101; /* Adjust the color as needed */
+}
+

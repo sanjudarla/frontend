@@ -1,12 +1,13 @@
 // NavBar.js
 import React, { useState } from 'react';
 import { FaHome, FaUser, FaCamera, FaEnvelope, FaComments, FaBook, FaUserCog, FaStar, FaChartBar, FaSearch, FaCog } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../NavBar/NavBar.css';
 
 const NavBar = ({ user, onLogout }) => {
   const [activeItem, setActiveItem] = useState('home');
   const [isSearchOpen, setIsSearchOpen] = useState(true);
+  const navigate = useNavigate();
 
   const handleItemClick = (itemName) => {
     setActiveItem(itemName);
@@ -36,11 +37,10 @@ const NavBar = ({ user, onLogout }) => {
         </li>
 
         <li className={`list ${activeItem === 'books' ? 'active' : ''}`} onClick={() => handleItemClick('books')}>
-          <Link to="/books">
+          <Link to="/books-list">
             <span className="icon">
               <FaBook />
             </span>
-         
           </Link>
         </li>
 
@@ -49,7 +49,6 @@ const NavBar = ({ user, onLogout }) => {
             <span className="icon">
               <FaUser />
             </span>
-           
           </Link>
         </li>
 
@@ -58,18 +57,14 @@ const NavBar = ({ user, onLogout }) => {
             <span className="icon">
               <FaChartBar />
             </span>
-           
-           
           </Link>
         </li>
 
         <li className={`list ${activeItem === 'favorites' ? 'active' : ''}`} onClick={() => handleItemClick('favorites')}>
-          <Link to="/favorites">
+          <Link to="/favourites">
             <span className="icon">
               <FaStar />
             </span>
-            
-           
           </Link>
         </li>
 
@@ -78,41 +73,31 @@ const NavBar = ({ user, onLogout }) => {
             <span className="icon">
               <FaComments />
             </span>
-          
-          
           </Link>
         </li>
-      
-
 
         <li className={`list ${activeItem === 'statistics' ? 'active' : ''}`} onClick={() => handleItemClick('statistics')}>
           <Link to="/statistics">
             <span className="icon">
               <FaChartBar />
             </span>
-           
-           
           </Link>
         </li>
-    
-        {user && user.isAdmin && (
-          <li className={`list ${activeItem === 'admin-panel' ? 'active' : ''}`} onClick={() => handleItemClick('admin-panel')}>
-            <Link to="/admin-panel">
-              <span className="icon">
-                <FaCog />
-              </span>
-              
-           
-            </Link>
-          </li>
 
+        {user && user.isAdmin && (
+          <li className={`list ${activeItem === 'add-books' ? 'active' : ''}`} onClick={() => handleItemClick('add-books')}>
+            <span className="icon">
+              <FaCamera />
+            </span>
+            <span className="text">Add Books</span>
+            {/* Add logic for "Add Books" functionality here */}
+          </li>
         )}
-          <li className={`list ${activeItem === 'search' ? 'active' : ''}`} onClick={() => handleItemClick('search')}>
+
+        <li className={`list ${activeItem === 'search' ? 'active' : ''}`} onClick={() => handleItemClick('search')}>
           {isSearchOpen && (
             <div className="search-box">
-              {/* Add your search input or component here */}
-              {/* <input type="text" placeholder="Search..." onChange={handleSearchInputChange} /> */}
-              <input type="text" placeholder="Search..." />
+              <input type="text" placeholder="Search..." onChange={handleSearchInputChange} />
             </div>
           )}
         </li>
@@ -124,13 +109,12 @@ const NavBar = ({ user, onLogout }) => {
         {user ? (
           <>
             <span className="user-name">Welcome, {user.UserName}</span>
-            <button onClick={onLogout}>Logout</button>
+            <button onClick={() => {onLogout(); navigate('/login')}}>Logout</button>
           </>
         ) : (
           null
         )}
       </li>
-      
     </div>
   );
 };
