@@ -1,20 +1,45 @@
 .genre-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  h1 {
-    margin-bottom: 20px;  
-  }
-  
-  .genres {
-    display: flex;
-  }
-  
-  .genre {
-    padding: 10px;
-    margin: 0 10px;
-    border: 1px solid #ddd;
-  }
-  
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.genres {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.genre {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.genre input[type="radio"] {
+  margin-right: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}

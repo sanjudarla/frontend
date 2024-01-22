@@ -70,6 +70,70 @@ const Home = () => {
         </Modal>
       )}
 
+      
+      {/* import React, { useState, useEffect } from "react";
+import NavBar from "../NavBar/NavBar";
+import '../Home/Home.css';
+import Footer from "../Footer/Footer";
+import Modal from "../Modal/Modal";
+
+const Home = () => {
+  const [books, setBooks] = useState([]);
+  const [selectedBook, setSelectedBook] = useState(null);
+
+  useEffect(() => {
+    fetch("your-api-endpoint")
+      .then(response => response.json())
+      .then(data => setBooks(data))
+      .catch(error => console.error("Error fetching book data:", error));
+  }, []);
+
+  const handleBookClick = (book) => {
+    setSelectedBook(book);
+  };
+
+  return (
+    <>
+      <NavBar />
+      <div className="home-page-container">
+        <div className="home-box">
+          <div className="home-title">
+            <h1>Welcome to Books Heaven</h1>
+          </div>
+        </div>
+        <div className="home-sub-title">
+          <h2>Latest Books</h2>
+        </div>
+        <div className="home-image-container">
+          {books.map((book) => (
+            <figure key={book.id} onClick={() => handleBookClick(book)}>
+              <img src={book.image} alt={book.name} />
+              <figcaption>
+                <p><span>Author:</span> {book.author}</p>
+                <p><span>Book Name:</span> {book.name}</p>
+                <p><span>Genre:</span> {book.genre}</p>
+              </figcaption>
+              <div className="read-button"><button>Read</button></div>
+            </figure>
+          ))}
+        </div>
+      </div>
+
+      {selectedBook && (
+        <Modal onClose={() => setSelectedBook(null)}>
+          <img src={selectedBook.image} alt={selectedBook.name} />
+          <div className="details">
+            <h2>{selectedBook.name}</h2>
+            <p><span>Author:</span> {selectedBook.author}</p>
+            <p><span>Genre:</span> {selectedBook.genre}</p>
+          </div>
+          <div>
+           
+          </div>
+        </Modal>
+      )} */}
+
+
       <div className="blog-container-title">
         <h2>Blog Posts</h2>
       </div>
