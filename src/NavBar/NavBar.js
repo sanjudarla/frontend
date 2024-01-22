@@ -1,46 +1,48 @@
 import React from "react";
-import '../NavBar/NavBar.css'
-import Logo from '../Images/Logo.png'
+import { Link } from 'react-router-dom';
+import '../NavBar/NavBar.css';
+import Logo from '../Images/Logo.png';
 import { FaUser } from "react-icons/fa";
 
-const isLoggedIn = true; // replace with your actual condition
-const username = "JohnDoe";
+const NavBar = ({ user, onLogout }) => {
+  console.log('User object in NavBar:', user);
 
-const NavBar = () => {
+  const handleLogout = () => {
+   const confirmLogout = window.confirm("Are You Sure Want to Logout?")
+   if (confirmLogout) {
+    onLogout();
+    window.location.href = '/';
+   }
+  };
+
   return (
     <div className="navbar-container">
       <ul className="nav-items">
-        <li><a href="/home">Home</a></li>
-        <li><a href="/books-list">Books</a></li>
-        <li><a href="/favourites">Favourites</a></li>
-        <li><a href="/authors">Author</a></li>
-        <li><a href="/genres">Genres</a></li>
-        <li><a href="/reviews">Reviews</a></li>
+        <li><Link to="/home">Home</Link></li>
+        <li><Link to="/books-list">Books</Link></li>
+        <li><Link to="/favourites">Favourites</Link></li>
+        <li><Link to="/authors">Author</Link></li>
+        <li><Link to="/genres">Genres</Link></li>
+        <li><Link to="/reviews">Reviews</Link></li>
         <div className="logo-link">
           <img src={Logo} alt="Books Heaven Logo" />
         </div>
       </ul>
       <div className="search-box">
-        <input type="text" placeholder="Search for a Book" />
+        <input
+          type="text"
+          placeholder="Search for a Book"
+        />
       </div>
-
-      {isLoggedIn && (
-        <div className="profile-box">
-          <span>{username}</span>
-          <i><FaUser size={20} color="#fff" /></i>
-        </div>
-      )}
-
-      {/* <div className="nav-buttons">
-        <button>
-          Logout
-        </button>
-      </div> */}
-
-      {/* Footer Section */}
-      {/* <div className="footer">
-        <p>&copy; 2024 Books Heaven. All rights reserved.</p>
-      </div> */}
+      <div className="user-profile">
+        {user && (
+          <>
+            <span>{user.UserName}</span>
+            <FaUser />
+            <button  onClick={handleLogout}>Logout</button>
+          </>
+        )}
+      </div>
     </div>
   );
 };

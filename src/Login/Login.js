@@ -1,3 +1,4 @@
+// Login.js
 import React, { useState } from 'react';
 import { FaEnvelope, FaLock } from 'react-icons/fa';
 import { toast } from 'react-toastify';
@@ -11,8 +12,8 @@ import '../Login/Login.css';
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [user, setUser] = useState(null); 
-  const [usertype, setUserType] = useState('user');// Add this line to declare the user state
+  const [user, setUser] = useState(null);
+  const [usertype, setUserType] = useState('user');
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -21,10 +22,12 @@ const Login = ({ onLogin }) => {
       setEmail(value);
     } else if (name === 'password') {
       setPassword(value);
-    } else if (name === 'usertype') { // Handle user type change
+    } else if (name === 'usertype') {
       setUserType(value);
     }
   };
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,28 +37,26 @@ const Login = ({ onLogin }) => {
         params: {
           Email: email,
           Password: password,
-          UserType: usertype, // Include user type in the request
+          UserType: usertype,
         },
       });
 
-      // Check if there is at least one user in the response
- 
       if (response.data.length > 0) {
         const userFound = response.data.find((user) => {
           return user.Email === email && user.Password === password && user.UserType === usertype;
         });
-  
+        
         if (userFound) {
           toast.success('Login successful');
+          console.log(userFound.UserName);
           setUser(userFound);
-  
+
           await onLogin(userFound);
-  
-          // Check user type and navigate accordingly
+
           if (usertype === 'admin') {
             navigate('/adminnavbar');
           } else {
-            navigate('/homepage');
+            navigate('/home');
           }
         } else {
           toast.error('Incorrect Email, password, or user type');
@@ -68,9 +69,6 @@ const Login = ({ onLogin }) => {
       toast.error('An error occurred during login');
     }
   };
-
-  
-  
 
   return (
     <div className="reg-container">
@@ -101,12 +99,12 @@ const Login = ({ onLogin }) => {
               />
             </div>
             <div className="inputbox">
-            <label htmlFor="usertype">User Type</label>
-            <select name="usertype" id="usertype" onChange={handleChange} value={usertype} required>
-              <option value="user">User</option>
-              <option value="admin">Admin</option>
-            </select>
-          </div>
+              <label htmlFor="usertype">User Type</label>
+              <select name="usertype" id="usertype" onChange={handleChange} value={usertype} required>
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+              </select>
+            </div>
             <div className="inputbox">
               <a href="/forgot-password">Forgot Password?</a>
             </div>
@@ -116,16 +114,14 @@ const Login = ({ onLogin }) => {
           </div>
           <div className="input-col-two">
             <div>
-             
-              <button type="submit">
-                Login
-              </button>
+              <button type="submit">Login</button>
             </div>
           </div>
         </div>
       </form>
       <div>
-      {user && <NavBar user={user} onLogout={() => setUser(null)} />}
+      {console.log('User before rendering NavBar:', user)}
+      {user && <NavBar user={user} />}
       </div>
     </div>
   );

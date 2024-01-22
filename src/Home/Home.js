@@ -11,7 +11,7 @@ import sample from '../Images/sample.jpg';
 import Footer from "../Footer/Footer";
 import Modal from "../Modal/Modal";
 
-const Home = () => {
+const Home = ({user}) => {
   const [selectedBook, setSelectedBook] = useState(null);
 
   const books = [
@@ -29,7 +29,7 @@ const Home = () => {
 
   return (
     <>
-      <NavBar />
+      <NavBar user={(user)}/>
       <div className="home-page-container">
         <div className="home-box">
           <div className="home-title">

@@ -64,10 +64,30 @@ justify-content: right;
   margin-top: 10px;
   margin-right: 10px;
 }
-.profile-box{
-  margin-left: 8pc;
-  display: flex;
+
   
+.search-box {
+  margin: 10px 0;
+  text-align: center;
+}
+
+.user-profile {
+  margin-left: 8pc;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+.user-profile button{
+  color: #fff;
+  padding: 5px;
+  margin-left: 7px;
+  background-color:rgb(65, 169, 65);
+}
+
+.user-profile span{
+  color: white;
+  padding-left: 2pc;
+  margin-right: 5px;
 }
 .footer {
   background-color: #333;
@@ -78,6 +98,7 @@ justify-content: right;
   bottom: 0;
   width: 100%;
 }
+
 
 
 
