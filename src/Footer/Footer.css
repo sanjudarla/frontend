@@ -1,0 +1,50 @@
+
+
+.footer {
+    background: linear-gradient(to right, #201f1f, #d8d5de);
+    color: #fff;
+    width: 100%;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+  }
+  
+  .footer-content {
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  
+  .social-media a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 18px;
+    transition: color 0.3s ease;
+  }
+  
+  .social-media a:hover {
+    color: #ffd700; /* Change the color on hover */
+  }
+  
+  .contact-info,
+  .language-options {
+    margin-top: 20px;
+  }
+  
+  .language-options a {
+    color: #ffd700; /* Set color for the language change link */
+    text-decoration: none;
+  }
+  
+  .language-options a:hover {
+    text-decoration: underline; /* Underline the language change link on hover */
+  }
+  

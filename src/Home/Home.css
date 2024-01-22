@@ -1,51 +1,156 @@
+
+.white-space{
+  margin-bottom: 2pc;
+}
+.home-title {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+
+}
+
+.home-title h1 {
+  color: rgb(29, 31, 31);
+  font-family: 'Times New Roman', serif;
+  padding-top: 10px;
+
+}
+
+.home-sub-title {
+  font-size: large;
+  color: #848484;
+  margin-left: 20px;
+  margin-top: -2pc;
+  margin-bottom: -1pc;
+  font-family: cursive;
+
+}
+
+.home-image-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-left: 0px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.home-image-container img {
+  max-width: 100%;
+  height: 60%;
+  border-radius: 8px;
+ 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+
+}
+
+.home-image-container figure {
+  width: 21%;
+  box-sizing: border-box;
+  margin-right: 1.5pc;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  height: 15pc;
+
+
+}
+
+.home-image-container figcaption {
+  margin-top: -1px;
+  text-align: left;
+  height: 20%;
+  
+}
+
+.home-image-container p {
+  overflow: hidden;
+  font-size: xx-small;
+  font-family: 'Times New Roman', serif;
+  margin-left: 3px;
+}
+
+.home-image-container figcaption span {
+  font-weight: bolder;
+}
+
+.home-image-container figure button {
+  color: #fff9f9;
+  background-color: #72bf6b;
+  border: 1px solid #848484;
+  cursor: pointer;
+  font-size: xx-small;
+  font-weight: 200;
+  text-align: center;
+  height: 2px;
+  margin-top: -2px;
+  
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.home-image-container .read-button button:hover {
+  background-color: #848484;
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.read-button{
+  margin-top: 6px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  
+}
+.blog-post-container{
+  display: flex;
+  justify-content: center;
+}
+
+
+.blog-container-title{
+  padding: 10px;
+  margin: auto;
+}
+.blog-post {
+  box-shadow: 0 2px 4px rgba(5, 4, 4, 0.1);
+  color: #090202;
+  background-color: rgba(212, 210, 210, 0.7); 
+  background-image:url('https://www.dennisingram.com/wp-content/uploads/2018/06/Open-Book-Transparent-Background-PNG-2.png');
+  background-size: cover;
+  filter:grayscale(40%);
+  background-position-x: right;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  width: 70%;
+  margin-left: 20px;
+  align-items: left;
+  padding: 10px;
+}
+
+.blog-post h2{
+  text-align: center;
+}
 /* Home.css */
 
-.home-container {
-  padding: 20px;
-  background: linear-gradient(rgb(66, 64, 64), rgb(146, 144, 144));
-  min-height: 100vh;
-  overflow-y: auto; /* Set a minimum height equal to the viewport height */
+.details {
+  margin-top: 20px;
 }
 
-.custom-home-container {
-  text-align: center;
-  margin-bottom: 20px;
+.details h2 {
+  color: #333;
+  font-size:medium;
 }
 
-.most-viewd-book-container {
-  text-align: left;
-  margin-bottom: 20px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+.details p {
+  color: #555;
+  margin-bottom: 5px;
+  font-size: x-small;
 }
 
-.actual-content {
-  max-width: 800px;
-  margin: 0 auto;
-  align-items: left;
-  min-height: calc(100vh - 100px); /* Adjust the value based on your design */
-  overflow-y: auto; /* Add this to enable vertical scrolling */
-}
-
-section {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-img {
-  max-width: 300px;
-  height: auto;
-  border-radius: 5%;
-
-}
-
-article {
-  flex: 1;
-  margin-left: 20px;
-}
-.most-read-books{
-  display: flex;
-}
-
-/* Add additional styles as needed */
+/* Add more specific styles as needed */

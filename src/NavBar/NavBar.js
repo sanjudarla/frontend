@@ -38,9 +38,9 @@ const NavBar = () => {
       </div> */}
 
       {/* Footer Section */}
-      <div className="footer">
+      {/* <div className="footer">
         <p>&copy; 2024 Books Heaven. All rights reserved.</p>
-      </div>
+      </div> */}
     </div>
   );
 };

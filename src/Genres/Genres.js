@@ -1,6 +1,7 @@
 import React from "react";
 import NavBar from "../NavBar/NavBar";
 import '../Genres/Genre.css'
+import Footer from "../Footer/Footer";
 
 const Genres = ({ user, onLogout }) => {
   const genres = [
@@ -26,6 +27,7 @@ const Genres = ({ user, onLogout }) => {
         </div>
 
       </div>
+      <Footer/>
     </>
   )
 }

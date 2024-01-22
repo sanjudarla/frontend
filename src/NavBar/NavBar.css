@@ -4,6 +4,11 @@
   align-items: center;
   background-color: black;
   overflow: auto;
+  position:relative;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+
 
 }
 .nav-items{
