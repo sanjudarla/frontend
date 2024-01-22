@@ -5,7 +5,9 @@
     margin: 0 auto;
     padding: 20px;
     font-family: 'Arial', sans-serif;
-    
+    align-items: center;
+    justify-content: center;
+    text-align: center;
   }
   
   header {

@@ -1,120 +1,46 @@
-// NavBar.js
-import React, { useState } from 'react';
-import { FaHome, FaUser, FaCamera, FaEnvelope, FaComments, FaBook, FaUserCog, FaStar, FaChartBar, FaSearch, FaCog } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
-import '../NavBar/NavBar.css';
+import React from "react";
+import '../NavBar/NavBar.css'
+import Logo from '../Images/Logo.png'
+import { FaUser } from "react-icons/fa";
 
-const NavBar = ({ user, onLogout }) => {
-  const [activeItem, setActiveItem] = useState('home');
-  const [isSearchOpen, setIsSearchOpen] = useState(true);
-  const navigate = useNavigate();
+const isLoggedIn = true; // replace with your actual condition
+const username = "JohnDoe";
 
-  const handleItemClick = (itemName) => {
-    setActiveItem(itemName);
-    if (itemName === 'search') {
-      setIsSearchOpen(!isSearchOpen);
-    } else {
-      // Close search box for other menu items
-      setIsSearchOpen(false);
-    }
-  };
-
-  const handleSearchInputChange = (e) => {
-    // Handle search input change here
-    const searchQuery = e.target.value;
-    // Perform search logic as needed
-  };
-
+const NavBar = () => {
   return (
-    <div className="navigation">
-      <ul>
-        <li className={`list ${activeItem === 'home' ? 'active' : ''}`} onClick={() => handleItemClick('home')}>
-          <Link to="/home">
-            <span className="icon">
-              <FaHome />
-            </span>
-          </Link>
-        </li>
-
-        <li className={`list ${activeItem === 'books' ? 'active' : ''}`} onClick={() => handleItemClick('books')}>
-          <Link to="/books-list">
-            <span className="icon">
-              <FaBook />
-            </span>
-          </Link>
-        </li>
-
-        <li className={`list ${activeItem === 'authors' ? 'active' : ''}`} onClick={() => handleItemClick('authors')}>
-          <Link to="/authors">
-            <span className="icon">
-              <FaUser />
-            </span>
-          </Link>
-        </li>
-
-        <li className={`list ${activeItem === 'genres' ? 'active' : ''}`} onClick={() => handleItemClick('genres')}>
-          <Link to="/genres">
-            <span className="icon">
-              <FaChartBar />
-            </span>
-          </Link>
-        </li>
-
-        <li className={`list ${activeItem === 'favorites' ? 'active' : ''}`} onClick={() => handleItemClick('favorites')}>
-          <Link to="/favourites">
-            <span className="icon">
-              <FaStar />
-            </span>
-          </Link>
-        </li>
-
-        <li className={`list ${activeItem === 'reviews' ? 'active' : ''}`} onClick={() => handleItemClick('reviews')}>
-          <Link to="/reviews">
-            <span className="icon">
-              <FaComments />
-            </span>
-          </Link>
-        </li>
-
-        <li className={`list ${activeItem === 'statistics' ? 'active' : ''}`} onClick={() => handleItemClick('statistics')}>
-          <Link to="/statistics">
-            <span className="icon">
-              <FaChartBar />
-            </span>
-          </Link>
-        </li>
-
-        {user && user.isAdmin && (
-          <li className={`list ${activeItem === 'add-books' ? 'active' : ''}`} onClick={() => handleItemClick('add-books')}>
-            <span className="icon">
-              <FaCamera />
-            </span>
-            <span className="text">Add Books</span>
-            {/* Add logic for "Add Books" functionality here */}
-          </li>
-        )}
-
-        <li className={`list ${activeItem === 'search' ? 'active' : ''}`} onClick={() => handleItemClick('search')}>
-          {isSearchOpen && (
-            <div className="search-box">
-              <input type="text" placeholder="Search..." onChange={handleSearchInputChange} />
-            </div>
-          )}
-        </li>
-
-        <div className="indicator"></div>
+    <div className="navbar-container">
+      <ul className="nav-items">
+        <li><a href="/home">Home</a></li>
+        <li><a href="/books-list">Books</a></li>
+        <li><a href="/favourites">Favourites</a></li>
+        <li><a href="/authors">Author</a></li>
+        <li><a href="/genres">Genres</a></li>
+        <li><a href="/reviews">Reviews</a></li>
+        <div className="logo-link">
+          <img src={Logo} alt="Books Heaven Logo" />
+        </div>
       </ul>
+      <div className="search-box">
+        <input type="text" placeholder="Search for a Book" />
+      </div>
 
-      <li className="user-info">
-        {user ? (
-          <>
-            <span className="user-name">Welcome, {user.UserName}</span>
-            <button onClick={() => {onLogout(); navigate('/login')}}>Logout</button>
-          </>
-        ) : (
-          null
-        )}
-      </li>
+      {isLoggedIn && (
+        <div className="profile-box">
+          <span>{username}</span>
+          <i><FaUser size={20} color="#fff" /></i>
+        </div>
+      )}
+
+      {/* <div className="nav-buttons">
+        <button>
+          Logout
+        </button>
+      </div> */}
+
+      {/* Footer Section */}
+      <div className="footer">
+        <p>&copy; 2024 Books Heaven. All rights reserved.</p>
+      </div>
     </div>
   );
 };

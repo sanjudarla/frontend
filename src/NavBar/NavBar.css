@@ -1,274 +1,81 @@
-.navigation {
-  position: relative;
-  width: 100%;
-  height: 70px;
-  background: linear-gradient(105deg, #141414, #4d32a0);
+.navbar-container{
   display: flex;
-  justify-content: space-between; /* Align items to the left and right */
+  justify-content: left;
   align-items: center;
-  border-radius: 1px;
-  transition: background 0.3s;
-}
-
-.navigation:hover {
-  background: linear-gradient(105deg, #141414, #4d32a0, #141414);
-}
-
-.navigation ul {
-  display: flex;
-  justify-content: flex-start; /* Align items to the left */
-  align-items: center;
-  padding-left: 20px; /* Add some padding to the left for spacing */
-}
-
-.navigation ul li {
-  position: relative;
-  width: 70px;
-  height: 70px;
-  list-style: none;
-  z-index: 1;
-}
-
-.navigation ul li a {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
-  text-align: center;
-  font-weight: 500;
-}
-
-.navigation ul li a .icon {
-  position: relative;
-  display: block;
-  line-height: 75px;
-  font-size: 1.5em;
-  text-align: center;
-  color: #fff;
-  transition: 0.5s;
-}
-
-/* .navigation ul li.active a .icon {
-  transform: translateY(-15px);
-} */
-
-.navigation ul li a .text {
-  position: absolute;
-  color: #fff;
-  font-weight: 400;
-  font-size: 0.75em;
-  letter-spacing: 0.05em;
-  opacity: 0;
-  /* transform: translateY(20px);
-  transition: 0.5s; */
-}
-
-.navigation ul li.active a .text {
-  opacity: 1;
- 
-}
-
-.navigation ul li a .circle {
-  position: absolute;
-  display: block;
-  width: 30px;
-  height: 30px;
-  background: transparent;
-  border-radius: 50%;
-  border: 1.8px solid #fff;
-  transform: translateY(-37px) scale(0);
-}
-
-.user-info {
-  display: flex;
-  align-items: center;
-  padding-right: 20px; /* Add some padding to the right for spacing */
-}
-.a{
-  color: white;
-}
-.user-info button {
-  background-color: #3498db;
-  color: #fff;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  margin-left: 9%;
-}
-span.user-name{
-  color: white;
-  margin-left: 5px;
-}
-
-.user-info button:hover {
-  background-color: #8ab4d1;
-}
-
-.indicator {
-  position: absolute;
-  top: -100%;
-  width: 10px;
-  height: 30px;
-  background: linear-gradient(0deg, #ffa576, #0951eb);
-  border: 6px solid #06021b;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: 0.1s;
-}
-
-
-.indicator::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: -22px;
-  width: 20px;
-  height: 20px;
-  background: transparent;
-  border-top-right-radius: 20px;
-  box-shadow: 1px -10px 0 #06021b;
-}
-
-.indicator::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  right: -22px;
-  width: 20px;
-  height: 20px;
-  background: transparent;
-  border-top-left-radius: 20px;
-  box-shadow: -1px -10px 0 #06021b;
-}
-
-.navigation ul li:nth-child(1).active~.indicator {
-  transform: translateX(calc(70px * 0));
-}
-
-.navigation ul li:nth-child(2).active~.indicator {
-  transform: translateX(calc(70px * 1));
-}
-
-.navigation ul li:nth-child(3).active~.indicator {
-  transform: translateX(calc(70px * 2));
-}
-
-.navigation ul li:nth-child(4).active~.indicator {
-  transform: translateX(calc(70px * 3));
-}
-
-.navigation ul li:nth-child(5).active~.indicator {
-  transform: translateX(calc(70px * 4));
-}
-
-
-/* -- YouTube Link Styles -- */
-
-#source-link {
-top: 60px;
-}
-
-#source-link > i {
-color: rgb(94, 106, 210);
-}
-
-#yt-link {  
-top: 10px;
-}
-
-#yt-link > i {
-color: rgb(219, 31, 106); 
+  background-color: black;
+  overflow: auto;
 
 }
-
-.list {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  margin-bottom: 10px;
-}
-
-.icon {
-  margin-right: 10px;
-}
-
-.text {
-  margin-right: 10px;
-}
-
-.search-link {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  color: inherit;
-  cursor: pointer;
-}
-
-.search-box {
-  position: relative;
-  margin-left: 40px;
-}
-
-.search-box input {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  width: 200px; /* Adjust the width as needed */
-  outline: none;
-}
-
-.search-box button {
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: #eee;
-  border: none;
-  padding: 5px;
-  border-radius: 3px;
-  cursor: pointer;
-}
-
-.search-box button:hover {
-  background-color: #ddd;
-}
-
-.meta-link {
-align-items: center;
-/* backdrop-filter: blur(3px); */
-background-color: rgba(255, 255, 255, 0.05);
-border: 1px solid rgba(255, 255, 255, 0.1);
-border-radius: 6px;
-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
-cursor: pointer;  
-display: inline-flex;
-gap: 5px;
-left: 10px;
-padding: 10px 20px;
-position: fixed;
-text-decoration: none;
-transition: background-color 600ms, border-color 600ms;
-z-index: 10000;
-}
-
-.meta-link:hover {
-background-color: rgba(255, 255, 255, 0.1);
-border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.meta-link > i, .meta-link > span {
-height: 20px;
-line-height: 20px;
-}
-
-.meta-link > span {
+.nav-items{
+display: flex;
 color: white;
-font-family: "Rubik", sans-serif;
-transition: color 600ms;
+align-items: center;
+
 }
+.navbar-container img{
+  width: 25%;
+
+}
+.logo-link {
+  background: transparent;
+  margin-left: 5pc;
+
+}
+.logo-link img {
+  opacity: 1; 
+  border-radius: 40%; /* You can adjust the opacity value (0.0 to 1.0) as needed */
+  
+}
+
+.nav-items li{
+  margin-right: 30px;
+  list-style-type:none;
+  
+}
+.nav-items li a{
+  color: inherit;
+  text-decoration: none;
+}
+.search-box{
+  margin-top: 1px;
+  margin-left: 10pc;
+}
+.profile-box{
+color: white;
+margin-left: 20px;
+justify-content: right;
+
+}
+
+.nav-buttons button{
+  background-color: #114a13;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+.profile-box{
+  margin-left: 8pc;
+  display: flex;
+  
+}
+.footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 3px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+
+
+
+
+

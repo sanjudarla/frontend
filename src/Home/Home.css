@@ -1,67 +1,51 @@
 /* Home.css */
 
+.home-container {
+  padding: 20px;
+  background: linear-gradient(rgb(66, 64, 64), rgb(146, 144, 144));
+  min-height: 100vh;
+  overflow-y: auto; /* Set a minimum height equal to the viewport height */
+}
+
 .custom-home-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #f8f8f8;
-    min-height: 100vh;
-  }
-  
-  .custom-content-container {
-    max-width: 800px;
-    margin: 20px;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .custom-section {
-    text-align: center;
-  }
-  
-  .custom-image-container {
-    margin-top: 20px;
-  }
-  
-  img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-  }
-  
-  button {
-    background-color: #4caf50;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 15px;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-  
-  .custom-blog-section {
-    margin-top: 40px;
-  }
-  
-  .custom-blog-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-  
-  .custom-blog-item {
-    flex: 1 1 300px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
-    background-color: #f9f9f9;
-  }
-  
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.most-viewd-book-container {
+  text-align: left;
+  margin-bottom: 20px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.actual-content {
+  max-width: 800px;
+  margin: 0 auto;
+  align-items: left;
+  min-height: calc(100vh - 100px); /* Adjust the value based on your design */
+  overflow-y: auto; /* Add this to enable vertical scrolling */
+}
+
+section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+img {
+  max-width: 300px;
+  height: auto;
+  border-radius: 5%;
+
+}
+
+article {
+  flex: 1;
+  margin-left: 20px;
+}
+.most-read-books{
+  display: flex;
+}
+
+/* Add additional styles as needed */
