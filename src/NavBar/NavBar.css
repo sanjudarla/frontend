@@ -22,15 +22,27 @@ align-items: center;
 
 }
 .logo-link {
-  background: transparent;
-  margin-left: 5pc;
+  background: inherit;
+  margin-left: 1%;
+  margin-right: 2pc;
+  align-items: center;
+}
 
-}
 .logo-link img {
-  opacity: 1; 
-  border-radius: 40%; /* You can adjust the opacity value (0.0 to 1.0) as needed */
-  
+  opacity: 1;
+  border-radius: 48%; /* Use 50% for a circular border */
+   /* Add a white border around the image */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+  transition: transform 0.3s ease-in-out; /* Add a smooth transition on hover */
+  background: inherit;
+  width: 30px; /* Set a specific width for the image */
+  height: 30px; /* Set a specific height for the image */
 }
+
+.logo-link img:hover {
+  transform: scale(1.1); /* Scale the image on hover */
+}
+
 
 .nav-items li{
   margin-right: 30px;

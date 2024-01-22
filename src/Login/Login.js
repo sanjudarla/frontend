@@ -54,7 +54,7 @@ const Login = ({ onLogin }) => {
           await onLogin(userFound);
 
           if (usertype === 'admin') {
-            navigate('/adminnavbar');
+            navigate('/home');
           } else {
             navigate('/home');
           }

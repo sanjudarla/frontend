@@ -51,8 +51,8 @@ function App() {
       <ToastContainer />
       <Router>
         <Routes>
-          <Route path="/adminnavbar" element={<AdminNavBar />} />
-          <Route path="/add-books" element={<AddBooks />} />
+          {/* <Route path="/adminnavbar" element={<AdminNavBar />} /> */}
+          <Route path="/add-books" element={<AddBooks user={user} onLogout={handleLogout} />} />
           <Route path="/home/*" element={<NavBar user={user} onLogout={handleLogout} />} />
           {/* Use a wildcard route to handle all nested routes under "/home" */}
           <Route path="/home" element={<Home user={user} onLogout={handleLogout} />} />
