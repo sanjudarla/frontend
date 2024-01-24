@@ -29,20 +29,30 @@ const AddBooks = ({ user, onLogout }) => {
     const formData = new FormData();
     formData.append('file', bookData.coverImage);
     formData.append('upload_preset', 'hsih7boi'); // Replace with your Cloudinary upload preset
-
-    const response = await fetch('https://api.cloudinary.com/v1_1/dkp69e3ql/image/upload', {
+  
+    const cloudinaryURL = 'https://api.cloudinary.com/v1_1/dkp69e3ql/image/upload';
+  
+    // Define the desired width and height for the uploaded image
+    const desiredWidth = 180;
+    const desiredHeight = 280;
+  
+    // Add the transformation parameters to the Cloudinary URL
+    const urlWithTransformations = `${cloudinaryURL}?width=${desiredWidth}&height=${desiredHeight}`;
+  
+    const response = await fetch(urlWithTransformations, {
       method: 'POST',
       body: formData,
     });
-
+  
     const result = await response.json();
-
+  
     if (response.ok) {
-      return result.secure_url; // Cloudinary URL of the uploaded image
+      return result.secure_url; // Cloudinary URL of the uploaded and transformed image
     } else {
       throw new Error(result.message || 'Failed to upload image to Cloudinary');
     }
   };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -102,8 +112,24 @@ const AddBooks = ({ user, onLogout }) => {
             </div>
             <div className="add-books-inputbox">
               <label htmlFor="genre">Genre:</label>
-              <input type="text" name="genre" onChange={handleChange} value={bookData.genre} required />
+              <select name="genre" onChange={handleChange} value={bookData.genre} required>
+                <option value="" disabled>Select a genre</option>
+                <option value="action">Action</option>
+                <option value="fiction">Fiction</option>
+                <option value="non-Fiction">Non-Fiction</option>
+                <option value="fantasy">Fantasy</option>
+                <option value="mystery">Mystery</option>
+                <option value="romance">Romance</option>
+                <option value="science-Fiction">Science Fiction</option>
+                <option value="historical Fiction">Historical Fiction</option>
+                <option value="thriller">Thriller</option>
+                <option value="horror">Horror</option>
+                <option value="cooking">Cooking</option>
+
+                {/* Add more options as needed */}
+              </select>
             </div>
+
             <div className="add-books-inputbox">
               <label htmlFor="description">Description:</label>
               <textarea name="description" onChange={handleChange} value={bookData.description} required />

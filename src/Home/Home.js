@@ -10,10 +10,17 @@ const Home = ({ user }) => {
   const [selectedBook, setSelectedBook] = useState(null);
 
   useEffect(() => {
-    axios.get("https://localhost:44331/api/BooksAPI")
+    // Adjust the API request to fetch only six books and sort by recent publication date
+    axios.get("https://localhost:44331/api/BooksAPI", {
+      params: {
+        limit: 6,  // Display only 6 books
+        sortBy: "publicationDate",
+        sortOrder: "desc"
+      }
+    })
       .then(response => {
-        console.log("Data from API:", response.data); // Log the data
-        setBooks(response.data);
+        console.log("Data from API:", response.data);
+        setBooks(response.data.slice(0, 6));
       })
       .catch(error => console.error("Error fetching book data:", error));
   }, []);
@@ -36,17 +43,14 @@ const Home = ({ user }) => {
         </div>
         <div className="home-image-container">
           {books.map((book) => (
-            <figure key={book.BookID
-            } onClick={() => handleBookClick(book)}>
+            <figure key={book.BookID} onClick={() => handleBookClick(book)}>
               <img src={book.CoverImage} alt={book.name} />
               <figcaption>
-                <p><span>Author:</span> {book.Author
-                }</p>
-                <p><span>Book Name:</span> {book.Title
-}</p>
+                <p><span>Author:</span> {book.Author}</p>
+                <p><span>Book Name:</span> {book.Title}</p>
                 <p><span>Genre:</span> {book.Genre}</p>
               </figcaption>
-              <div className="read-button"><button>Read</button></div>
+              <div className="home-read-button"><button>Read</button></div>
             </figure>
           ))}
         </div>
@@ -54,25 +58,33 @@ const Home = ({ user }) => {
 
       {selectedBook && (
         <Modal onClose={() => setSelectedBook(null)}>
-          <img src={selectedBook.imageUrl} alt={selectedBook.name} />
+
           <div className="details">
-            <h2>{selectedBook.name}</h2>
-            <p><span>Author:</span> {selectedBook.author}</p>
-            <p><span>Genre:</span> {selectedBook.genre}</p>
+            <img src={selectedBook.CoverImage} alt={selectedBook.name} />
+            <div className="details-descript">
+              <h4>{selectedBook.Title}</h4>
+              <p><strong><i>Author:</i></strong> {selectedBook.Author}</p>
+              <p><strong><i>Genre:</i></strong> {selectedBook.Genre}</p>
+            </div>
+            <div className="read-button">
+              <button>Read</button>
+            </div>
+          </div>
+          <div className="description">
+            <p><strong><i>Description:</i></strong> {selectedBook.Description}</p>
           </div>
 
-        </Modal>
-      )}
 
+        </Modal>
+
+      )}
 
       <div className="blog-container-title">
         <h2>Blog Posts</h2>
       </div>
       <div className="blog-post-container">
         <div className="blog-post">
-          <h2>
-            This is A Books reading Library
-          </h2>
+          <h2>This is A Books reading Library</h2>
           <p>
             Welcome to our Books Library – a haven for book enthusiasts! Dive into the world of literature where the possibilities are endless.
           </p>
@@ -100,6 +112,7 @@ const Home = ({ user }) => {
           <p>
             Happy reading! 📚✨
           </p>
+
         </div>
       </div>
       <Footer />

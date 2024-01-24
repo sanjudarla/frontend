@@ -1,50 +1,106 @@
- .modal-overlay {
+/* Add these styles to your existing CSS or create a new file and import it */
+
+/* Modal overlay */
+.modal-overlay {
   position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
   display: flex;
-  width: 50%;
-  height: 10%;
-  left: 10%;
-  background: transparent;
-  float: left;
-  align-items: center;
   justify-content: center;
-  margin-top: -12pc;
-  z-index: 999;
-  padding-right: 30px;
+  align-items: center;
+  z-index: 1000;
 }
 
+/* Modal content */
 .modal-content {
-  background-color: #fff;
+  background: linear-gradient(rgb(205, 204, 204), rgb(131, 130, 130));
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  text-align: left;
-  margin-right: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  max-width: 600px;
+
+  width: 100%;
+  display: flex;
+  height: 50%;
+}
+
+
+.details {
+  width: 40%;
+  
+}
+
+.details img {
   width: 70%;
+  border-radius: 4px;
+  display: flex;
+  height: 50%;
 }
 
-.modal-content img {
-  max-width: 30%;
-  height: auto;
-  border-radius: 5px;
+.details h2 {
+  font-size: 20px;
+  margin-bottom: 1px;
 }
-/*
-.close-button {
-  background-color: #72bf6b;
-  color: #fff;
-  border: none;
-  padding: 10px;
+
+.details p {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+  font-size: x-small;
+}
+
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
   cursor: pointer;
-  font-size: 14px;
-  border-radius: 5px;
-  margin-top: 10px;
+  color: #fff;
+  font-size: 20px;
 }
 
-.close-button:hover {
-  background-color: #4e8f4e;
+.close-button {
+  background-color: rgb(12, 196, 49);
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  width: 10%;
+  height: 10%;
+  margin-left: 50px;
+
 }
 
 .description {
-  color: #777;
-  max-width: 50%; 
-} */
+
+  word-wrap: break-word;
+  width: 100%;
+  margin-left: 20px;
+  margin: 0;
+}
+
+.details-descript {
+  width: 100%;
+  font-size: medium;
+  margin-top: -10px;
+
+}
+.details-descript h4{
+   font-family: 'Times New Roman', Times, serif;
+   margin-top: 20px;
+}
+
+.read-button {
+  width: 30%;
+  margin-left: 30px;
+}
+
+.read-button button {
+  background-color: #333;
+
+
+}
+
+/* Add these styles to your existing CSS or create a new file and import it */

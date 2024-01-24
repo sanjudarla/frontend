@@ -1,38 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import NavBar from "../NavBar/NavBar";
-import './BooksList.css'; // Import the CSS file
-import aspnet from '../Images/aspnet.jpg';
-import react from '../Images/react.jpg';
-import sample from '../Images/sample.jpg';
+import './BooksList.css';
 import Footer from "../Footer/Footer";
 import Modal from "../Modal/Modal";
+import '../Modal/Modal.css'
 
 const BooksList = ({ user, onLogout }) => {
+  const [books, setBooks] = useState([]);
   const [selectedBook, setSelectedBook] = useState(null);
+  const [filteredGenre, setFilteredGenre] = useState(null);
+
+  useEffect(() => {
+    // Fetch books from the web API
+    axios.get("https://localhost:44331/api/BooksAPI", {
+      params: {
+        limit: 6,  // Display only 6 books
+        sortBy: "publicationDate",
+        sortOrder: "desc"
+      }
+    })
+      .then(response => {
+        console.log("Data from API:", response.data);
+        setBooks(response.data.slice(0, 6));
+      })
+      .catch(error => console.error("Error fetching book data:", error));
+  }, []);
 
   const addToFavourites = (book) => {
     // Your logic to add the book to favourites goes here
-    console.log(`Added ${book.name} to favourites!`);
+    console.log(`Added ${book.Title} to favourites!`);
   };
-
-  const books = [
-    { id: 1, image: aspnet, author: "AuthorName1", name: "BookName1", genre: "Genre1" },
-    { id: 2, image: react, author: "AuthorName2", name: "BookName2", genre: "Genre2" },
-    { id: 3, image: sample, author: "AuthorName3", name: "BookName3", genre: "Genre3" },
-    // Add more books as needed
-  ];
-
-  // Placeholder data for fiction books - replace with actual data
-  const fictionBooks = [
-    { id: 4, image: 'fictionImage1.jpg', author: "FictionAuthor1", name: "FictionBook1", genre: "FictionGenre1" },
-    { id: 5, image: 'fictionImage2.jpg', author: "FictionAuthor2", name: "FictionBook2", genre: "FictionGenre2" },
-    { id: 6, image: 'fictionImage3.jpg', author: "FictionAuthor3", name: "FictionBook3", genre: "FictionGenre3" },
-    // Add more fiction books as needed
-  ];
 
   const handleBookClick = (book) => {
     setSelectedBook(book);
   };
+
+  const handleGenreFilter = (genre) => {
+    setFilteredGenre(genre);
+  };
+
+  const clearGenreFilter = () => {
+    setFilteredGenre(null);
+  };
+
+  const filteredBooks = filteredGenre
+    ? books.filter(book => book.Genre === filteredGenre)
+    : books;
 
   return (
     <>
@@ -47,15 +61,15 @@ const BooksList = ({ user, onLogout }) => {
           <h2>Latest books</h2>
         </div>
         <div className="home-image-container">
-          {books.map((book) => (
-            <figure key={book.id} onClick={() => handleBookClick(book)}>
-              <img src={book.image} alt={book.name} />
+          {filteredBooks.map((book) => (
+            <figure key={book.BookID} onClick={() => handleBookClick(book)}>
+              <img src={book.CoverImage} alt={book.Title} />
               <figcaption>
-                <p><span>Author:</span> {book.author}</p>
-                <p><span>Book Name:</span> {book.name}</p>
-                <p><span>Genre:</span> {book.genre}</p>
+                <p><span>Author:</span> {book.Author}</p>
+                <p><span>Book Name:</span> {book.Title}</p>
+                <p><span>Genre:</span> {book.Genre}</p>
               </figcaption>
-              <div className="read-button"><button onClick={() => addToFavourites(book)}>Read</button></div>
+              <div className="home-read-button"><button onClick={() => addToFavourites(book)}>Read</button></div>
             </figure>
           ))}
         </div>
@@ -63,14 +77,14 @@ const BooksList = ({ user, onLogout }) => {
 
       {selectedBook && (
         <Modal onClose={() => setSelectedBook(null)}>
-          <img src={selectedBook.image} alt={selectedBook.name} />
+          <img src={selectedBook.CoverImage} alt={selectedBook.Title} />
           <div className="details">
-            <h2>{selectedBook.name}</h2>
-            <p><span>Author:</span> {selectedBook.author}</p>
-            <p><span>Genre:</span> {selectedBook.genre}</p>
+            <h2>{selectedBook.Title}</h2>
+            <p><span>Author:</span> {selectedBook.Author}</p>
+            <p><span>Genre:</span> {selectedBook.Genre}</p>
           </div>
           <div>
-            {/* Additional details or actions related to the selected book */}
+
           </div>
         </Modal>
       )}
@@ -79,18 +93,136 @@ const BooksList = ({ user, onLogout }) => {
         <h2>Fiction</h2>
       </div>
       <div className="home-image-container">
-        {fictionBooks.map((book) => (
-          <figure key={book.id} onClick={() => handleBookClick(book)}>
-            <img src={book.image} alt={book.name} />
-            <figcaption>
-              <p><span>Author:</span> {book.author}</p>
-              <p><span>Book Name:</span> {book.name}</p>
-              <p><span>Genre:</span> {book.genre}</p>
-            </figcaption>
-            <div className="read-button"><button onClick={() => addToFavourites(book)}>Read</button></div>
+        {filteredBooks.map((book) => (
+          <figure key={book.BookID} onClick={() => handleBookClick(book)}>
+            {book.Genre === "Fiction" && (
+              <>
+                <img src={book.CoverImage} alt={book.Title} />
+                <figcaption>
+                  <p><span>Author:</span> {book.Author}</p>
+                  <p><span>Book Name:</span> {book.Title}</p>
+                  <p><span>Genre:</span> {book.Genre}</p>
+                </figcaption>
+                <div className="home-read-button">
+                  <button onClick={() => addToFavourites(book)}>Read</button>
+                </div>
+              </>
+            )}
           </figure>
         ))}
       </div>
+      <div className="home-sub-title">
+        <h2>Action</h2>
+      </div>
+      <div className="home-image-container">
+        {filteredBooks.map((book) => (
+          <figure key={book.BookID} onClick={() => handleBookClick(book)}>
+            {book.Genre === "Action" && (
+              <>
+                <img src={book.CoverImage} alt={book.Title} />
+                <figcaption>
+                  <p><span>Author:</span> {book.Author}</p>
+                  <p><span>Book Name:</span> {book.Title}</p>
+                  <p><span>Genre:</span> {book.Genre}</p>
+                </figcaption>
+                <div className="home-read-button">
+                  <button onClick={() => addToFavourites(book)}>Read</button>
+                </div>
+              </>
+            )}
+          </figure>
+        ))}
+      </div>
+      <div className="home-sub-title">
+        <h2>Mystery</h2>
+      </div>
+      <div className="home-image-container">
+        {filteredBooks.map((book) => (
+          <figure key={book.BookID} onClick={() => handleBookClick(book)}>
+            {book.Genre === "mystery" && (
+              <>
+                <img src={book.CoverImage} alt={book.Title} />
+                <figcaption>
+                  <p><span>Author:</span> {book.Author}</p>
+                  <p><span>Book Name:</span> {book.Title}</p>
+                  <p><span>Genre:</span> {book.Genre}</p>
+                </figcaption>
+                <div className="home-read-button">
+                  <button onClick={() => addToFavourites(book)}>Read</button>
+                </div>
+              </>
+            )}
+          </figure>
+        ))}
+      </div>
+      <div className="home-sub-title">
+        <h2>Romance</h2>
+      </div>
+      <div className="home-image-container">
+        {filteredBooks.map((book) => (
+          <figure key={book.BookID} onClick={() => handleBookClick(book)}>
+            {book.Genre === "romance" && (
+              <>
+                <img src={book.CoverImage} alt={book.Title} />
+                <figcaption>
+                  <p><span>Author:</span> {book.Author}</p>
+                  <p><span>Book Name:</span> {book.Title}</p>
+                  <p><span>Genre:</span> {book.Genre}</p>
+                </figcaption>
+                <div className="home-read-button">
+                  <button onClick={() => addToFavourites(book)}>Read</button>
+                </div>
+              </>
+            )}
+          </figure>
+        ))}
+      </div>
+      <div className="home-sub-title">
+        <h2>Fantacy</h2>
+      </div>
+      <div className="home-image-container">
+        {filteredBooks.map((book) => (
+          <figure key={book.BookID} onClick={() => handleBookClick(book)}>
+            {book.Genre === "fantacy" && (
+              <>
+                <img src={book.CoverImage} alt={book.Title} />
+                <figcaption>
+                  <p><span>Author:</span> {book.Author}</p>
+                  <p><span>Book Name:</span> {book.Title}</p>
+                  <p><span>Genre:</span> {book.Genre}</p>
+                </figcaption>
+                <div className="home-read-button">
+                  <button onClick={() => addToFavourites(book)}>Read</button>
+                </div>
+              </>
+            )}
+          </figure>
+        ))}
+      </div>
+      <div className="home-sub-title">
+        <h2>Romance</h2>
+      </div>
+      <div className="home-image-container">
+        {filteredBooks.map((book) => (
+          <figure key={book.BookID} onClick={() => handleBookClick(book)}>
+            {book.Genre === "romance" && (
+              <>
+                <img src={book.CoverImage} alt={book.Title} />
+                <figcaption>
+                  <p><span>Author:</span> {book.Author}</p>
+                  <p><span>Book Name:</span> {book.Title}</p>
+                  <p><span>Genre:</span> {book.Genre}</p>
+                </figcaption>
+                <div className="home-read-button">
+                  <button onClick={() => addToFavourites(book)}>Read</button>
+                </div>
+              </>
+            )}
+          </figure>
+        ))}
+      </div>
+
+
       <Footer />
     </>
   );
