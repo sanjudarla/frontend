@@ -5,13 +5,13 @@ import '../Books/AddBooks.css';
 import NavBar from '../../NavBar/NavBar';
 
 const AddBooks = ({ user, onLogout }) => {
-  const [formData, setFormData] = useState({
+  const [bookData, setBookData] = useState({
     title: '',
     author: '',
     genre: '',
     description: '',
     publicationDate: '',
-    coverImage: null,
+    coverImage: null, // Store the file object, not just the URL
   });
 
   const [loading, setLoading] = useState(false);
@@ -19,23 +19,55 @@ const AddBooks = ({ user, onLogout }) => {
   const handleChange = (e) => {
     const { name, value, files } = e.target;
 
-    setFormData((prevData) => ({
+    setBookData((prevData) => ({
       ...prevData,
-      [name]: name === 'coverImage' ? files[0] : value,
+      [name]: name === 'coverImage' ? files[0] : value, // Corrected key to 'coverImage'
     }));
   };
-  console.log(formData)
 
-  const handleAddBook = async () => {
+  const uploadToCloudinary = async () => {
+    const formData = new FormData();
+    formData.append('file', bookData.coverImage);
+    formData.append('upload_preset', 'hsih7boi'); // Replace with your Cloudinary upload preset
+
+    const response = await fetch('https://api.cloudinary.com/v1_1/dkp69e3ql/image/upload', {
+      method: 'POST',
+      body: formData,
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      return result.secure_url; // Cloudinary URL of the uploaded image
+    } else {
+      throw new Error(result.message || 'Failed to upload image to Cloudinary');
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
     try {
+      setLoading(true);
+
+      // Upload the cover image to Cloudinary
+      const imageUrl = await uploadToCloudinary();
+
+      // Once uploaded, send the book data to your server
       const response = await fetch('https://localhost:44331/api/BooksAPI/', {
         method: 'POST',
-        body: formData,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...bookData,
+          coverImage: imageUrl, // Replace the coverImage property with the Cloudinary URL
+        }),
       });
 
       if (response.ok) {
         toast.success('Book added successfully');
-        setFormData({
+        setBookData({
           title: '',
           author: '',
           genre: '',
@@ -54,15 +86,6 @@ const AddBooks = ({ user, onLogout }) => {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setLoading(true);
-
-    // Additional validation or checks can be added here
-
-    handleAddBook();
-  };
-
   return (
     <div>
       <NavBar user={user} onLogout={onLogout} />
@@ -71,23 +94,23 @@ const AddBooks = ({ user, onLogout }) => {
           <div className="add-books-box">
             <div className="add-books-inputbox">
               <label htmlFor="title">Title:</label>
-              <input type="text" name="title" onChange={handleChange} value={formData.title} required />
+              <input type="text" name="title" onChange={handleChange} value={bookData.title} required />
             </div>
             <div className="add-books-inputbox">
               <label htmlFor="author">Author:</label>
-              <input type="text" name="author" onChange={handleChange} value={formData.author} required />
+              <input type="text" name="author" onChange={handleChange} value={bookData.author} required />
             </div>
             <div className="add-books-inputbox">
               <label htmlFor="genre">Genre:</label>
-              <input type="text" name="genre" onChange={handleChange} value={formData.genre} required />
+              <input type="text" name="genre" onChange={handleChange} value={bookData.genre} required />
             </div>
             <div className="add-books-inputbox">
               <label htmlFor="description">Description:</label>
-              <textarea name="description" onChange={handleChange} value={formData.description} required />
+              <textarea name="description" onChange={handleChange} value={bookData.description} required />
             </div>
             <div className="add-books-inputbox">
               <label htmlFor="publicationDate">Publication Date:</label>
-              <input type="date" name="publicationDate" onChange={handleChange} value={formData.publicationDate} required />
+              <input type="date" name="publicationDate" onChange={handleChange} value={bookData.publicationDate} required />
             </div>
             <div className="add-books-inputbox">
               <label htmlFor="coverImage">Cover Image:</label>

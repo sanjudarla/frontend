@@ -1,90 +1,20 @@
-// Home.js
-
-import React, { useState } from "react";
-import NavBar from "../NavBar/NavBar";
-import '../Home/Home.css';
-import aspnet from '../Images/aspnet.jpg';
-import harrypotter from '../Images/harrypotter.jpg' 
-import controlyourmind from '../Images/controlyourmind.jpg'
-import react from '../Images/react.jpg';
-import sample from '../Images/sample.jpg';
-import Footer from "../Footer/Footer";
-import Modal from "../Modal/Modal";
-
-const Home = ({user}) => {
-  const [selectedBook, setSelectedBook] = useState(null);
-
-  const books = [
-    { id: 1, image: aspnet, author: "AuthorName1", name: "BookName1", genre: "Genre1" },
-    { id: 2, image: react, author: "AuthorName2", name: "BookName2", genre: "Genre2" },
-    { id: 3, image: sample, author: "AuthorName3", name: "BookName3", genre: "Genre3" },
-    { id: 4, image: react, author: "AuthorName4", name: "BookName4", genre: "Genre4" },
-    { id: 5, image: harrypotter, author: "AuthorName5", name: "BookName5", genre: "Genre5" },
-    { id: 6, image: controlyourmind, author: "AuthorName6", name: "BookName6", genre: "Genre6" },
-  ];
-
-  const handleBookClick = (book) => {
-    setSelectedBook(book);
-  };
-
-  return (
-    <>
-      <NavBar user={(user)}/>
-      <div className="home-page-container">
-        <div className="home-box">
-          <div className="home-title">
-            <h1>Welcome to Books Heaven</h1>
-          </div>
-        </div>
-        <div className="home-sub-title">
-          <h2>Latest Books</h2>
-        </div>
-        <div className="home-image-container">
-          {books.map((book) => (
-            <figure key={book.id} onClick={() => handleBookClick(book)}>
-              <img src={book.image} alt={book.name} />
-              <figcaption>
-                <p><span>Author:</span> {book.author}</p>
-                <p><span>Book Name:</span> {book.name}</p>
-                <p><span>Genre:</span> {book.genre}</p>
-              </figcaption>
-              <div className="read-button"><button>Read</button></div>
-            </figure>
-          ))}
-        </div>
-      </div>
-
-      {selectedBook && (
-        <Modal onClose={() => setSelectedBook(null)}>
-          <img src={selectedBook.image} alt={selectedBook.name} />
-          <div className="details">
-            <h2>{selectedBook.name}</h2>
-            <p><span>Author:</span> {selectedBook.author}</p>
-            <p><span>Genre:</span> {selectedBook.genre}</p>
-            
-            
-          </div>
-          <div>
-            this is the de
-            </div>
-        </Modal>
-      )}
-
-      
-      {/* import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import NavBar from "../NavBar/NavBar";
 import '../Home/Home.css';
 import Footer from "../Footer/Footer";
 import Modal from "../Modal/Modal";
 
-const Home = () => {
+const Home = ({ user }) => {
   const [books, setBooks] = useState([]);
   const [selectedBook, setSelectedBook] = useState(null);
 
   useEffect(() => {
-    fetch("your-api-endpoint")
-      .then(response => response.json())
-      .then(data => setBooks(data))
+    axios.get("https://localhost:44331/api/BooksAPI")
+      .then(response => {
+        console.log("Data from API:", response.data); // Log the data
+        setBooks(response.data);
+      })
       .catch(error => console.error("Error fetching book data:", error));
   }, []);
 
@@ -94,7 +24,7 @@ const Home = () => {
 
   return (
     <>
-      <NavBar />
+      <NavBar user={(user)} />
       <div className="home-page-container">
         <div className="home-box">
           <div className="home-title">
@@ -106,12 +36,15 @@ const Home = () => {
         </div>
         <div className="home-image-container">
           {books.map((book) => (
-            <figure key={book.id} onClick={() => handleBookClick(book)}>
-              <img src={book.image} alt={book.name} />
+            <figure key={book.BookID
+            } onClick={() => handleBookClick(book)}>
+              <img src={book.CoverImage} alt={book.name} />
               <figcaption>
-                <p><span>Author:</span> {book.author}</p>
-                <p><span>Book Name:</span> {book.name}</p>
-                <p><span>Genre:</span> {book.genre}</p>
+                <p><span>Author:</span> {book.Author
+                }</p>
+                <p><span>Book Name:</span> {book.Title
+}</p>
+                <p><span>Genre:</span> {book.Genre}</p>
               </figcaption>
               <div className="read-button"><button>Read</button></div>
             </figure>
@@ -121,17 +54,15 @@ const Home = () => {
 
       {selectedBook && (
         <Modal onClose={() => setSelectedBook(null)}>
-          <img src={selectedBook.image} alt={selectedBook.name} />
+          <img src={selectedBook.imageUrl} alt={selectedBook.name} />
           <div className="details">
             <h2>{selectedBook.name}</h2>
             <p><span>Author:</span> {selectedBook.author}</p>
             <p><span>Genre:</span> {selectedBook.genre}</p>
           </div>
-          <div>
-           
-          </div>
+
         </Modal>
-      )} */}
+      )}
 
 
       <div className="blog-container-title">
@@ -169,11 +100,9 @@ const Home = () => {
           <p>
             Happy reading! 📚✨
           </p>
-
-
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

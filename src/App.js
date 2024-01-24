@@ -12,14 +12,16 @@ import Registration from './Registration/Registration';
 import Gallery from './NavItems/Gallery';
 import FeedBack from './NavItems/FeedBack';
 import MainPage from './MainPage/MainPage';
-import AdminNavBar from './Admin/AdminNavBar/AdminNavBar';
+//import AdminNavBar from './Admin/AdminNavBar/AdminNavBar';
 import AddBooks from './Admin/Books/AddBooks';
 import BooksList from './Books/BooksList';
 import Authors from './Authors/Author';
 import Genres from './Genres/Genres';
 import Favourites from './Favourites/Favourites';
 import Reviews from './Review/Review';
-import Statistics from './Statistics/Statistics';
+import { navigate } from 'react-router-dom';
+
+
 //import Profile from './Profile'; // Import your Profile component
 
 function App() {
@@ -71,6 +73,9 @@ function App() {
           {/* Profile route nested inside the BooksList route */}
           <Route path="/books-list/profile" element={<NavBar user={user} />} />
           <Route path="/" element={<MainPage />} />
+
+          <Route path="/" element={<MainPage user={user} onLogout={handleLogout} />} />
+
         </Routes>
       </Router>
     </div>
